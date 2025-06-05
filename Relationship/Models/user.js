@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 const {Schema} = mongoose;
 
-// one to few relation
+// one to few relation - 1 approche
 
 main()
 .then(() => console.log ("connection sucessfull"))
