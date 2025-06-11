@@ -22,6 +22,29 @@ app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
 
+
+//New Route
+router.get("/new", (req, res) => {
+    console.log(req.user);
+    if (!req.isAuthenticated()) {
+        req.flash("error", "you must be logged in to create listing!");
+        return res.redirect("/login");
+    }
+    res.render("listings/new.ejs");
+});
+
+// logout
+
+router.get("/logout", (req, res, next) => {
+    req.logout((err) => {
+        if (err) {
+            return next(err);
+        }
+        req.flash("success", "you are logged out!");
+        res.redirect("/listings");
+    });
+}); 
+
 app.all("*", (req, res, next) => {
     next(new ExpressError(404, "Page Not Found!"));
 });
